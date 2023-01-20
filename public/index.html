@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style-wln.css" />
+    <title>Tugas-3/Deveployment</title>
+  </head>
+  <body>
+    <img src="wulan.jpg" />
+    <div class="bungkus">
+      <h1>Data Diri</h1>
+      <hr />
+      <div class="data">
+        <table></table>
+      </div>
+    </div>
+
+    <script>
+      const table = document.querySelector("table");
+      const caption = document.createElement("caption");
+
+      async function data() {
+        const res = await fetch("/api/lihat");
+        const value = await res.json();
+
+        for (let data in value) {
+          const tr = document.createElement("tr");
+          const th = document.createElement("th");
+          const td = document.createElement("td");
+          const isi = document.createElement("td");
+          th.textContent = value[data][0];
+          td.textContent = value[data][1];
+          isi.textContent = value[data][2];
+
+          tr.appendChild(th);
+          tr.appendChild(td);
+          tr.appendChild(isi);
+          table.appendChild(tr);
+        }
+        table.appendChild(caption);
+      }
+
+      data();
+    </script>
+  </body>
+</html>
